@@ -1,4 +1,4 @@
-# Outty
+# outty
 
 an outdoor activity recommender based on your location and interests
 
