@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<div class="card p-5 profile-container">
+
+  <div class="profile-item p-2">
+    <img id="profilepic" src={{current_user.userImage}} alt="profile pic">
+  </div>
+
+
+  <div class="profile-item p-2">
+    <h3>{{current_user.name}}</h3><br>
+    <p>{{current_user.emailAddress}}</p> <br>
+    <p><i id="locationicon" class="material-icons">my_location</i>{{current_user.city}}, {{current_user.state}}, {{current_user.zipcode}}</p>
+  </div>
+  <div class="profile-item p-2">
+    <h1>{{ current_user.liked.count() }}</h1><br>
+    <h6>
+      {% if current_user.liked.count() ==1 %}
+      liked activity
+      {% else %}
+      liked activities
+      {% endif %}
+    </h6>
+  </div>
+  <div class="profile-item p-2">
+    <h1>{{ current_user.completed.count() }}</h1><br>
+    <h6>
+      {% if current_user.liked.count() ==1 %}
+      completed activity
+      {% else %}
+      completed activities
+      {% endif %}
+    </h6>
+  </div>
+  <div class="profile-item">
+    <h3>Your Interests</h3><br>
+    <h3>
+
+      {% if current_user.hiking %}
+      <i class="mdl-icon-toggle material-icons">hiking</i>
+      {% endif %}
+
+      {% if current_user.mountainBiking %}
+      <i class="mdl-icon-toggle material-icons">directions_bike</i>
+      {% endif %}
+
+      {% if current_user.camping %}
+      <i class="mdl-icon-toggle material-icons">cabin</i>
+      {% endif %}
+
+    </h3>
+  </div>
+</div>
+</div>
+</div>
+{% if likedActivities %}
+<div class="container">
+  <h3>Liked Activities ({{ current_user.liked.count() }})</h3>
+  <div class="card-columns">
+    {% for likedActivity in likedActivities %}
+    <div class="card">
+      {% if likedActivity.thumbnail %}
+      <img class="card-img-top" src={{likedActivity.thumbnail}}>
+      {% else %}
+      <img class="card-img-top" src={{url_for('static', filename='img/noImage.jpg')}}>
+      {% endif %}
+
+      <div class="card-body">
+        <h5 class="card-title">{{likedActivity.name}}</h5>
+        <p class="card-text">{{likedActivity.type}}</p>
+        <a class="btn btn-light" onclick="window.location.href='./activity?id={{likedActivity.id}}';" role="button">view activity</a>
+      </div>
+
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+
+{% if completedActivities %}
+
+
+<div class="container">
+  <h3>Completed Activities ({{ current_user.completed.count() }})</h3>
+
+  <div class="card-columns">
+    {% for completedActivity in completedActivities %}
+    <div class="card">
+      {% if completedActivity.thumbnail %}
+      <img class="card-img-top" src={{completedActivity.thumbnail}}>
+      {% else %}
+
+      <img class="card-img-top" src={{url_for('static', filename='img/noImage.jpg')}}>
+
+      {% endif %}
+
+      <div class="card-body">
+        <h5 class="card-title">{{completedActivity.name}}</h5>
+        <p class="card-text">{{completedActivity.type}}</p>
+        <a class="btn btn-light" onclick="window.location.href='./activity?id={{completedActivity.id}}';" role="button">view activity</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+
+
+{% endblock %}

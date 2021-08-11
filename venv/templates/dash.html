@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="dashboard-container">
+  <!-- <div class="item"> -->
+  <div class="cardy p-4 dashboard-text">
+    <h3>{{greeting}}, {{current_user.name}}</h3>
+    <br>
+
+    <i class="mdl-icon-toggle material-icons">place</i> {{current_user.city}}, {{current_user.state}}
+    <br>
+    <i class="mdl-icon-toggle material-icons">thermostat</i> {{ weather_data }}
+    <br>
+    <br>
+    <p>My Interests</p>
+
+    {% if current_user.hiking %}
+    <i class="mdl-icon-toggle material-icons">hiking</i>
+    {% endif %}
+
+    {% if current_user.mountainBiking %}
+    <i class="mdl-icon-toggle material-icons">directions_bike</i>
+    {% endif %}
+
+    {% if current_user.camping %}
+    <i class="mdl-icon-toggle material-icons">cabin</i>
+    {% endif %}
+
+    <br>
+
+  </div>
+  <!-- </div> -->
+
+
+
+  <!-- <div class="item"> -->
+  <div class="card-columns">
+
+    {% for suggestion in suggestions %}
+    <div class="suggestion-card card">
+      <div class="content">
+        {% if suggestion['image'] %}
+        <img class="card-img-top" src="{{suggestion['image']}}">
+        {% else %}
+        <img class="card-img-top" src={{url_for('static', filename='img/noImage.jpg')}}>
+        {% endif %}
+      </div>
+
+      <div class="card-body">
+        <p class="card-title">{{suggestion['title']}}</p>
+        <p class="card-text">
+          {{suggestion['activity']}}
+        </p>
+        {% if suggestion['id'] %}
+        <a class="btn btn-light" onclick="window.location.href='./activity?id={{suggestion['id']}}';" role="button">view activity</a>
+        {% endif %}
+
+
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  <!-- </div> -->
+
+
+</div>
+<br>
+
+
+{% endblock %}
