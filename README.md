@@ -1,4 +1,6 @@
-# Outty: an outdoor activity recommender based on your location and interests
+# Outty
+
+an outdoor activity recommender based on your location and interests
 
 #### Link:
 * http://outty-5000-server.herokuapp.com/
