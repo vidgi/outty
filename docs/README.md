@@ -1,5 +1,43 @@
-## Outty
-* Gurhar, Zach, Vidya, Sam
+## Outty Documentation
+
+## Tools Used
+
+* Python/flask + HTML/CSS/JS
+* libraries: anime.js bootstrap, jinja
+* apis: trail-api, openweather, google maps
+* data base: flask-sqlalchemy
+* testing: flask-test
+* deployment: Heroku, Docker, Github-Secrets, Github-Actions
+* See requirements.txt for more details on requirements
+
+### Running the app locally
+
+#### The app is containerized with docker and will require:
+
+* Install docker: https://docs.docker.com/docker-for-mac/install/
+
+* a file called config.py in the venv directory is necessary for managing api keys. It contains the necessary api keys:
+
+    - trail_api_key = "XXXXXXXXXXXXXXXXXXXX" # trail api: https://rapidapi.com/trailapi/api/trailapi
+
+    - geo_encode_key = "XXXXXXXXXXXXXXXXXXXX"  # geo encoding: (google maps geocoding)
+
+    - weather_api_key = "XXXXXXXXXXXXXXXXXXXX" # OpenWeather api
+
+    - map_api_key = "XXXXXXXXXXXXXXXXXXXX"  # Google Maps api
+
+* collaborator access to notion page contains keys in 'notes page'
+
+#### Run app through command line
+* ``` cd venv ```
+
+* ``` docker build -t flask-heroku:latest . ```
+
+* ``` docker run -d -p 5000:5000 flask-heroku ```
+
+* See Dockerfile for necessary configuration
+
+* Potentially helpful link: https://medium.com/@ksashok containerise-your-python-flask-using-docker-and-deploy-it-onto-heroku-a0b48d025e43
 
 ## Unit Tests:
 
@@ -9,8 +47,8 @@
 
 * Unit tests make use of flask_testing module
 
-## USER TESTS:
-### Create new user 
+## User Tests:
+### Create new user
     Use case name
 	    New user creation
     Description
@@ -36,7 +74,7 @@
         Post-conditions
             User is logged into site and user provided information is stored
 
-### Sign in existing user 
+### Sign in existing user
 	Use case name
         Existing User Sign In
     Description
@@ -58,7 +96,7 @@
     Post-conditions
     Correct parameters should be passable into recommendation functions and update settings functions
 
-### Get recommendation for user 
+### Get recommendation for user
     Use case name
         Recommendation correctness
     Description
@@ -68,8 +106,8 @@
     Test steps
     User signs up (provides activity preferences)
     Expected result
-        User is navigated to their dashboard (profile?) 
-        A set of recommendations is displayed in UI 
+        User is navigated to their dashboard (profile?)
+        A set of recommendations is displayed in UI
         That set of recommendations includes only the activities that the user selected as their activity preferences
     Actual result
     Same as expected results
